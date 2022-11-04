@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.hfad.quizzoann.homeFragment"
+        android:name="com.hfad.quizzoann.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -30,9 +30,6 @@
         <action
             android:id="@+id/action_practiceFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
-        <argument
-            android:name="message"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"

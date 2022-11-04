@@ -23,17 +23,13 @@ public class AddQuestionsFragment extends Fragment {
                              Bundle savedInstanceState) {
 // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_questions, container, false);
-        Button btnNext = view.findViewById(R.id.btn_add);
+        Button btnCreate = view.findViewById(R.id.button_create);
         TextView messageView = view.findViewById(R.id.etv_message);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
 
-            public void onClick(View view) {
 
-                String msg = messageView.getText().toString();
-                Navigation.findNavController(view).navigate(msg);
-            }
-        });
+
+
+
         return view;
     }
 }

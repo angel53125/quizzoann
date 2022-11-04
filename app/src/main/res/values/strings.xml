@@ -11,6 +11,13 @@
         <item>Animals</item>
         <item>Sports</item>
     </string-array>
+    <string name = 'create_genre'>Add a new Genre!</string>
+    <string name = 'pick_genre'>Genre</string>
+    <string name = 'answer'>Answer: </string>
+    <string name = 'choice_1'>Choice 1: </string>
+    <string name = 'choice_2'>Choice 2: </string>
+    <string name = 'choice_3'>Choice 3: </string>
+    <string name = 'choice_4'>Choice 4: </string>
 
 
 
