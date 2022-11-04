@@ -6,33 +6,61 @@ public class DataBase {
     private String data;
 
     private ArrayList<Question> questions = new ArrayList<Question>();
-    private ArrayList<String> genres = new ArrayList<String>();
 
-    public String retrieveQuestionsWithGenre(String genre)
+    public ArrayList<Question>  retrieveQuestionsWithGenre(String genre)
     {
+        //Create a new list and loop
 
-        if(genre.equals("Geography")) {
+        addQuestion();
+
+        return questions;
+        /*
+        if(genre.equals("Geography"))
+        {
+
+            System.out.println("o");
             System.out.println(questions.get(0).getQuestion());
-            return questions.get(0).getQuestion();
+            System.out.println(questions.get(1).getQuestion());
+            System.out.println(questions.get(2).getQuestion());
+            System.out.println(questions.get(3).getQuestion());
+            System.out.println(questions.get(0).toString());
+            return questions.;
         }
         else if (genre.equals("Sports")) {
-            System.out.println(questions.get(3).getQuestion());
-            return questions.get(3).getQuestion();
-        }
-        else if (genre.equals("Video Games")) {
-            System.out.println(questions.get(2).getQuestion());
-            return questions.get(2).getQuestion();
-        }
-        else if (genre.equals("Animals")) {
+            System.out.println("o");
+            System.out.println(questions.get(0).getQuestion());
             System.out.println(questions.get(1).getQuestion());
+            System.out.println(questions.get(2).getQuestion());
+            System.out.println(questions.get(3).getQuestion());
+
+            return questions;
+        }
+
+        else return questions;
+
+
+        else if (genre.equals("Sports")) {
+            System.out.println(questions.get(0).getQuestion());
             return questions.get(1).getQuestion();
         }
+        else if (genre.equals("Video Games")) {
+            System.out.println(questions.get(0).getQuestion());
+            return questions.get(1).getQuestion();
+        }
+        else if (genre.equals("Animals")) {
+            System.out.println(questions.get(0).getQuestion());
+            return questions.get(1).getQuestion();
+        }
+
+
         else return "";
+
+        */
     }
 
 
 
-    public void addQuestion(Question newQuestions)
+    public void addQuestion()
     {
         ArrayList<String> choices = new ArrayList<String>();
 
@@ -59,7 +87,7 @@ public class DataBase {
         choices.add("Congo");
         choices.add("Amazon");
 
-        Question gQ3 = new  Question("Geography","How many countries are in the world?","Nile",choices,"Explorer John Hanning Speke discovered the source of the Nile on August 3rd, 1858.");
+        Question gQ3 = new  Question("Geography","What is the name of the longest river in the world?","Nile",choices,"Explorer John Hanning Speke discovered the source of the Nile on August 3rd, 1858.");
         questions.add(gQ3);
         choices.clear();
 
