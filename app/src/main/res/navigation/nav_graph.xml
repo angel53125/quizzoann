@@ -16,12 +16,19 @@
         <action
             android:id="@+id/action_homeFragment_to_practiceFragment"
             app:destination="@id/practiceFragment" />
+        <argument
+            android:name="new_genre"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/addQuestionsFragment"
         android:name="com.hfad.quizzoann.AddQuestionsFragment"
         android:label="fragment_add_questions"
-        tools:layout="@layout/fragment_add_questions" />
+        tools:layout="@layout/fragment_add_questions" >
+        <action
+            android:id="@+id/action_addQuestionsFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/practiceFragment"
         android:name="com.hfad.quizzoann.PracticeFragment"
@@ -30,10 +37,20 @@
         <action
             android:id="@+id/action_practiceFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
+        <argument
+            android:name="genre"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.hfad.quizzoann.ResultFragment"
         android:label="fragment_result"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result" >
+        <argument
+            android:name="score"
+            app:argType="integer" />
+        <argument
+            android:name="total_questions"
+            app:argType="integer" />
+    </fragment>
 </navigation>

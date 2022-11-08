@@ -9,7 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 //import androidx.navigation.findNavController;
 
@@ -24,12 +28,62 @@ public class AddQuestionsFragment extends Fragment {
 // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_questions, container, false);
         Button btnCreate = view.findViewById(R.id.button_create);
-        TextView messageView = view.findViewById(R.id.etv_message);
+
+        Button btnNext = view.findViewById(R.id.btn_next);
+        Spinner spin = view.findViewById(R.id.spinner_genre);
+
+        EditText etGen = view.findViewById(R.id.et_genre);
+        EditText etAns = view.findViewById(R.id.et_ans);
+        EditText etChoice1 = view.findViewById(R.id.et_q1);
+        EditText etChoice2 = view.findViewById(R.id.et_q2);
+        EditText etChoice3 = view.findViewById(R.id.et_q3);
+        EditText etChoice4 = view.findViewById(R.id.et_q4);
+        EditText etQues = view.findViewById(R.id.et_ques);
+        EditText etFact = view.findViewById(R.id.et_fact);
+
+        ArrayList<String> choice = new  ArrayList<String>();
+        choice.add(etChoice1.getText().toString());
+        choice.add(etChoice2.getText().toString());
+        choice.add(etChoice3.getText().toString());
+        choice.add(etChoice4.getText().toString());
+        DataBase data = new DataBase();
+
+
+
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Question new_ques = new Question((etGen.getText().toString()),etQues.getText().toString()
+                        ,etAns.getText().toString(),choice,etFact.getText().toString());
+
+               String new_genre =  new_ques.getGenre();
+
+               data.addQuestion(new_ques);
+
+
+
+
+              AddQuestionsFragmentDirections.ActionAddQuestionsFragmentToHomeFragment2 action
+                   = AddQuestionsFragmentDirections.actionAddQuestionsFragmentToHomeFragment2(new_genre);
+                Navigation.findNavController(view).navigate(action);
+
+            }
+        });
+
+
+
+
+
 
 
 
 
 
         return view;
+    }
+
+    public String getSpinner(Spinner spin)
+    {
+        return spin.getSelectedItem().toString();
     }
 }

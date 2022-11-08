@@ -5,8 +5,8 @@
       <map>
         <entry key="..\:/Users/Student/AndroidStudioProjects/quizzoann/app/src/main/res/layout/activity_main.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/Student/AndroidStudioProjects/quizzoann/app/src/main/res/layout/fragment_add_questions.xml" value="0.33" />
-        <entry key="..\:/Users/Student/AndroidStudioProjects/quizzoann/app/src/main/res/layout/fragment_home.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/Student/AndroidStudioProjects/quizzoann/app/src/main/res/layout/fragment_practice.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Student/AndroidStudioProjects/quizzoann/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Student/AndroidStudioProjects/quizzoann/app/src/main/res/layout/fragment_practice.xml" value="0.22" />
         <entry key="..\:/Users/Student/AndroidStudioProjects/quizzoann/app/src/main/res/layout/fragment_result.xml" value="0.21875" />
       </map>
     </option>

@@ -3,14 +3,10 @@
     <string name="welcome_text">Welcome to the Quizzo app!</string>
     <string name="genre">Add Genre</string>
     <string name="practice">Practice Quiz</string>
-    <string name="add_genre">Select the genre you would like to add</string>
-    <string name="add">Add</string>
-    <string-array name="spin_options">
-        <item>Geography</item>
-        <item>Video Games</item>
-        <item>Animals</item>
-        <item>Sports</item>
-    </string-array>
+    <string name="add_genre">Select the genre you would like to practice</string>
+    <string name="select">select</string>
+    <string name="next_">Next</string>
+
     <string name = 'create_genre'>Add a new Genre!</string>
     <string name = 'pick_genre'>Genre</string>
     <string name = 'answer'>Answer: </string>
@@ -18,6 +14,7 @@
     <string name = 'choice_2'>Choice 2: </string>
     <string name = 'choice_3'>Choice 3: </string>
     <string name = 'choice_4'>Choice 4: </string>
+    <string name = 'results'>Results</string>
 
 
 

@@ -3,6 +3,7 @@ package com.hfad.quizzoann;
 import java.util.ArrayList;
 
 public class Question {
+
     private String genre;
     private String question;
     private String answer;
