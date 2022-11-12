@@ -1,5 +1,6 @@
 package com.hfad.quizzoann;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,12 +13,16 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //import androidx.navigation.findNavController;
 
+//Angel Negron
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
+ * This fragment class allows the user to practice quizzo questions
+ * depending on what genre selected from the previous fragment
  */
 
 
@@ -33,7 +38,6 @@ public class PracticeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_practice, container, false);
 
         Button btnNext = view.findViewById(R.id.btn_next);
-        Button btnResult = view.findViewById(R.id.btn_result);
         DataBase data = new DataBase();
         TextView tv_question = view.findViewById((R.id.textView_question));
         TextView tv_remaining = view.findViewById(R.id.textView_answered);
@@ -52,102 +56,90 @@ public class PracticeFragment extends Fragment {
         String genre = PracticeFragmentArgs.fromBundle(requireArguments()).getGenre();
 
         tv_question.setText(data.retrieveQuestionsWithGenre(genre,x).getQuestion());
+
+
         for (int i = 0; i < data.retrieveQuestionsWithGenre(genre,x).getChoices().size();i++)
         {
             rb_Question[i].setText(data.retrieveQuestionsWithGenre(genre,x).getChoices().get(i));
         }
-        tv_total.setText(String.valueOf(data.retrieveQuestionsWithGenre(genre,x).getChoices().size()+ 1));
+
+        //tv_total.setText(String.valueOf(data.retrieveQuestionsWithGenre(genre,x).getChoices().size()+ 1));
+        tv_total.setText(String.valueOf(data.getSize(genre)));
         tv_remaining.setText(String.valueOf(j));
 
-        int total = data.retrieveQuestionsWithGenre(genre,x).getChoices().size()+ 1;
-
-
-
-
-
+        //int total = data.retrieveQuestionsWithGenre(genre,x).getChoices().size()+ 1;
+        int total = data.getSize(genre);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                if (x < data.retrieveQuestionsWithGenre(genre,x).getChoices().size()) {
+                if (x <= total) {
                     x++;
                     j++;
                 }
-                System.out.println("Test" + data.retrieveQuestionsWithGenre(genre,x).getQuestion());
+
 
                 tv_question.setText(data.retrieveQuestionsWithGenre(genre,x).getQuestion());
-                for (int i = 0; i < data.retrieveQuestionsWithGenre(genre,x).getChoices().size();i++)
-                {
-                    rb_Question[i].setText(data.retrieveQuestionsWithGenre(genre,x).getChoices().get(i));
-                }
 
                 tv_remaining.setText(String.valueOf(j));
 
+                //Stores the number of correct answers
 
+                correct = correct + correct(rb_Question,data.retrieveQuestionsWithGenre(genre,x-1).getAnswer(),data.retrieveQuestionsWithGenre(genre,x-1).getfunFact());
 
+                //Loads in next set of questions and choices
+                for (int i = 0; i < data.retrieveQuestionsWithGenre(genre,x).getChoices().size();i++)
+                {
+                    rb_Question[i].setText(data.retrieveQuestionsWithGenre(genre,x).getChoices().get(i));
 
-                       correct = correct + correct(rb_Question,data.retrieveQuestionsWithGenre(genre,x).getAnswer());
-                System.out.println(data.retrieveQuestionsWithGenre(genre,x).getAnswer());
+                }
 
+                //Once the all questions have been answered takes the user to
+                //the results screen
+                if (x >= total)
+                {
+                    PracticeFragmentDirections.ActionPracticeFragmentToResultFragment action
+                            = PracticeFragmentDirections.actionPracticeFragmentToResultFragment(correct
+                            ,total);
 
+                    Navigation.findNavController(view).navigate(action);
 
-
-
-
-
-
-
-
-
-                //tv_total.setText(data.retrieveQuestionsWithGenre(genre,x).getQuestion());
-
-
-
-               // String x = data.retrieveQuestionsWithGenre(getSpinner(spin)).get(i).getQuestion();
-
-                //tv_question.setText(x);
-               // rb_q1.setText(data.retrieveQuestionsWithGenre(getSpinner(spin)).get(i).getChoices().get(i));
-               // rb_q2.setText("Okay");
-                //data.retrieveQuestionsWithGenre().getGenre().toString();
-
-
-               //tv_question.setText(data.retrieveQuestionsWithGenre(getSpinner(spin)).getChoices().get(3));
-
+                }
             }
         });
-
-        btnResult.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PracticeFragmentDirections.ActionPracticeFragmentToResultFragment action
-                        = PracticeFragmentDirections.actionPracticeFragmentToResultFragment(correct
-                        ,total);
-
-                Navigation.findNavController(view).navigate(action);
-            }
-        });
-
-
-
-
-
 
         return view;
 
 
     }
 
-    public int correct(RadioButton[] rb,String answer)
+    /**
+     * Takes the selected answer and compares it to the correct answer
+     * also displays correct a toast after each answer
+     * @param rb an array of all the choices for a question
+     * @param answer The correct answer
+     * @param funFact a fun fact about the prvious question
+     * @return 1 for a point earned or 0 for 9 point earned
+     */
+    public int correct(RadioButton[] rb,String answer,String funFact)
     {
         for (int z = 0; z < rb.length;z++) {
             if (rb[z].isChecked()) {
                if(rb[z].getText().equals(answer))
                {
+                   Context context = getContext();
+                   int time = Toast.LENGTH_LONG;
+
+                   Toast toast = Toast.makeText(context, "The answer is correct:\nFun Fact: " + funFact,time);
+                   toast.show();
                    return 1;
                }
             }
         }
+        Context context = getContext();
+        int time = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, "The answer is incorrect:\nFun Fact: " + funFact,time);
+        toast.show();
         return 0;
     }
 

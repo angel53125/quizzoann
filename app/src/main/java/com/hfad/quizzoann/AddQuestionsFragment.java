@@ -17,9 +17,11 @@ import java.util.ArrayList;
 
 //import androidx.navigation.findNavController;
 
+//ANgel Negron
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
+ * Adds a new genre to the list of options
  */
 public class AddQuestionsFragment extends Fragment {
     @Override
@@ -42,10 +44,9 @@ public class AddQuestionsFragment extends Fragment {
         EditText etFact = view.findViewById(R.id.et_fact);
 
         ArrayList<String> choice = new  ArrayList<String>();
-        choice.add(etChoice1.getText().toString());
-        choice.add(etChoice2.getText().toString());
-        choice.add(etChoice3.getText().toString());
-        choice.add(etChoice4.getText().toString());
+
+
+
         DataBase data = new DataBase();
 
 
@@ -53,30 +54,32 @@ public class AddQuestionsFragment extends Fragment {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                choice.add(etChoice1.getText().toString());
+                choice.add(etChoice2.getText().toString());
+                choice.add(etChoice3.getText().toString());
+                choice.add(etChoice4.getText().toString());
+
+                //Gets new question from the user
                 Question new_ques = new Question((etGen.getText().toString()),etQues.getText().toString()
                         ,etAns.getText().toString(),choice,etFact.getText().toString());
 
                String new_genre =  new_ques.getGenre();
 
+               //adds the new question to the database
                data.addQuestion(new_ques);
 
+              System.out.println("Test" + data.retrieveQuestionsWithGenre(new_genre,0).getChoices().get(0));
 
 
 
+               //Sends the newly added spinner item to the home fragment
               AddQuestionsFragmentDirections.ActionAddQuestionsFragmentToHomeFragment2 action
                    = AddQuestionsFragmentDirections.actionAddQuestionsFragmentToHomeFragment2(new_genre);
                 Navigation.findNavController(view).navigate(action);
 
             }
         });
-
-
-
-
-
-
-
-
 
 
         return view;

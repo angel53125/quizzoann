@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
+//Angel Negron
 public class ResultFragment extends Fragment {
 
 
@@ -31,8 +31,11 @@ public class ResultFragment extends Fragment {
         System.out.println((correct*1.0));
 
         double percent_score = (correct/(total*1.0)) * 100;
-        tv_correct.setText(String.valueOf(percent_score + "%"));
 
+        String.format("%.2f",percent_score);
+        tv_correct.setText("You got a " + String.format("%.2f",percent_score) + "%");
+
+        //Special message printed if score is above or below 90%
         if(percent_score > 90)
         {
             tv_q.setText("WOW YOURE REALLY SMART!");

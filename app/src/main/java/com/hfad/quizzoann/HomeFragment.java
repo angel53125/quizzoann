@@ -16,10 +16,13 @@ import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 
+//Angel Negron
 
+/**
+ * This fragment is the home screen where the user can choose to
+ * add a genre, select a genre, or start practicing quizzo questions
+ */
 public class HomeFragment extends Fragment {
-
-    //Boolean f =AddQuestionsFragmentArgs.fromBundle(requireArguments()).getFlag();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +34,7 @@ public class HomeFragment extends Fragment {
 
 
 
+        //Array list that adds items to the spinner
         ArrayList<String> items = new ArrayList<>();
         items.add("Geography");
         items.add("Video Games");
@@ -38,24 +42,23 @@ public class HomeFragment extends Fragment {
         items.add("Sports");
         items.add("All");
 
-
-            System.out.println("Info we made it");
-
+            //Tries too retrieve the new genre from the add genre page
+            //But if there has not been a genre added the exception is caught
             try {
                 items.add(HomeFragmentArgs.fromBundle(requireArguments()).getNewGenre());
             }
             catch(Exception e)
             {
-                System.out.println("okay");
+                System.out.println("No genre has been added");
             }
 
-
+        //List of spinner items
         String[] test = new String[items.size()];
-
         for (int i = 0; i < items.size(); i++) {
             test[i] = items.get(i);
         }
 
+        //passes added info into spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_dropdown_item,items);
         spin.setAdapter(adapter);
 
@@ -64,28 +67,18 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                //Sends the user to the add question fragment
                 Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_addQuestionFragment);
-
-
-
             }
         });
+
 
         btnQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String genre = spin.getSelectedItem().toString();
-
-               // HomeFragmentDirections.ActionHomeFragmentToPracticeFragment action =
-                     //   HomeFragmentDirections.actionHomeFragmentToPracticeFragment(genre);
-
-                //Navigation.findNavController(view).
-                       // navigate(R.id.action_homeFragment_to_practiceFragment);
-
                 String genre = spin.getSelectedItem().toString();
 
-
-                System.out.println(genre);
+                //Send the genre to the practice fragment
                 HomeFragmentDirections.ActionHomeFragmentToPracticeFragment action
                         = HomeFragmentDirections.actionHomeFragmentToPracticeFragment(genre);
 

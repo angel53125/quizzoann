@@ -42,14 +42,6 @@
         android:layout_marginTop="150dp"
        />
 
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select"
-        android:layout_marginTop="75dp"
-        />
-
     <TextView
         android:id="@+id/textView_prompt"
         android:layout_width="wrap_content"
