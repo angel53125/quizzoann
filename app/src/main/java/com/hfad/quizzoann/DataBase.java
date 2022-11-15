@@ -3,15 +3,34 @@ package com.hfad.quizzoann;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Singleton class
+ */
 //Angel Negron
 public class DataBase {
     private String data;
 
-    private static ArrayList<Question> questions = new ArrayList<Question>();
+    private static DataBase myDatabase;
+    private ArrayList<Question> questions = new ArrayList<Question>();
 
+    public static DataBase getMyDatabase()
+    {
+        if(myDatabase == null)
+        {
+            myDatabase = new DataBase();
+        }
+
+        return myDatabase;
+    }
+
+    private DataBase()
+    {
+        questions = new ArrayList<Question>();
+        loadData();
+    }
 
     public Question retrieveQuestionsWithGenre(String genre, int x) {
-        dataBase();
+        loadData();
 //System.out.println("This" + questions.get(8).getQuestion());
         if (genre.equals("Geography")) {
 
@@ -41,7 +60,7 @@ public class DataBase {
         else if (genre.equals("All")) {
             x += 0;
 
-                return questions.get(x);
+            return questions.get(x);
 
         }
 
@@ -50,7 +69,8 @@ public class DataBase {
     }
 
 
-    public void dataBase() {
+    //Load database
+    public void loadData() {
         Question gQ1 = new Question("Geography", "Which ocean is the largest", "Pacific", new ArrayList<String>(Arrays.asList("Pacific", "Atlantic", "Artic", "Indian")), "The Pacific Ocean stretches to an astonishing 63.8 million square miles!");
         questions.add(gQ1);
 
@@ -161,12 +181,10 @@ public class DataBase {
 
     public void addQuestion(Question ques) {
         questions.clear();
-        dataBase();
+        loadData();
         questions.add(ques);
     }
 
-
-    //Size of questionbs
     public int getSize(String genre)
     {
         if(genre.equals("Geography"))
@@ -192,4 +210,12 @@ public class DataBase {
         return 1;
     }
 
+
+
 }
+
+
+
+
+
+

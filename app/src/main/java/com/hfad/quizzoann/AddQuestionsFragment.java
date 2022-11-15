@@ -47,9 +47,6 @@ public class AddQuestionsFragment extends Fragment {
 
 
 
-        DataBase data = new DataBase();
-
-
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,9 +64,9 @@ public class AddQuestionsFragment extends Fragment {
                String new_genre =  new_ques.getGenre();
 
                //adds the new question to the database
-               data.addQuestion(new_ques);
 
-              System.out.println("Test" + data.retrieveQuestionsWithGenre(new_genre,0).getChoices().get(0));
+                DataBase.getMyDatabase().addQuestion(new_ques);
+
 
 
 

@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 
 public class PracticeFragment extends Fragment {
-    int i = 0;
     int x = 0;
     int j = 1;
     int correct = 0;
@@ -38,7 +37,6 @@ public class PracticeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_practice, container, false);
 
         Button btnNext = view.findViewById(R.id.btn_next);
-        DataBase data = new DataBase();
         TextView tv_question = view.findViewById((R.id.textView_question));
         TextView tv_remaining = view.findViewById(R.id.textView_answered);
         TextView tv_total = view.findViewById(R.id.textView_total);
@@ -55,20 +53,29 @@ public class PracticeFragment extends Fragment {
 
         String genre = PracticeFragmentArgs.fromBundle(requireArguments()).getGenre();
 
-        tv_question.setText(data.retrieveQuestionsWithGenre(genre,x).getQuestion());
+        tv_question.setText(DataBase.getMyDatabase().retrieveQuestionsWithGenre(genre,x).getQuestion());
 
 
-        for (int i = 0; i < data.retrieveQuestionsWithGenre(genre,x).getChoices().size();i++)
+
+
+
+
+
+
+
+
+
+        for (int i = 0; i < DataBase.getMyDatabase().retrieveQuestionsWithGenre(genre,x).getChoices().size();i++)
         {
-            rb_Question[i].setText(data.retrieveQuestionsWithGenre(genre,x).getChoices().get(i));
+            rb_Question[i].setText(DataBase.getMyDatabase().retrieveQuestionsWithGenre(genre,x).getChoices().get(i));
         }
 
         //tv_total.setText(String.valueOf(data.retrieveQuestionsWithGenre(genre,x).getChoices().size()+ 1));
-        tv_total.setText(String.valueOf(data.getSize(genre)));
+        tv_total.setText(String.valueOf(DataBase.getMyDatabase().getSize(genre)));
         tv_remaining.setText(String.valueOf(j));
 
         //int total = data.retrieveQuestionsWithGenre(genre,x).getChoices().size()+ 1;
-        int total = data.getSize(genre);
+        int total = DataBase.getMyDatabase().getSize(genre);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,18 +85,18 @@ public class PracticeFragment extends Fragment {
                 }
 
 
-                tv_question.setText(data.retrieveQuestionsWithGenre(genre,x).getQuestion());
+                tv_question.setText(DataBase.getMyDatabase().retrieveQuestionsWithGenre(genre,x).getQuestion());
 
                 tv_remaining.setText(String.valueOf(j));
 
                 //Stores the number of correct answers
 
-                correct = correct + correct(rb_Question,data.retrieveQuestionsWithGenre(genre,x-1).getAnswer(),data.retrieveQuestionsWithGenre(genre,x-1).getfunFact());
+                correct = correct + correct(rb_Question,DataBase.getMyDatabase().retrieveQuestionsWithGenre(genre,x-1).getAnswer(),DataBase.getMyDatabase().retrieveQuestionsWithGenre(genre,x-1).getfunFact());
 
                 //Loads in next set of questions and choices
-                for (int i = 0; i < data.retrieveQuestionsWithGenre(genre,x).getChoices().size();i++)
+                for (int i = 0; i < DataBase.getMyDatabase().retrieveQuestionsWithGenre(genre,x).getChoices().size();i++)
                 {
-                    rb_Question[i].setText(data.retrieveQuestionsWithGenre(genre,x).getChoices().get(i));
+                    rb_Question[i].setText(DataBase.getMyDatabase().retrieveQuestionsWithGenre(genre,x).getChoices().get(i));
 
                 }
 
